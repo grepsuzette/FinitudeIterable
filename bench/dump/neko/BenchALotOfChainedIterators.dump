@@ -1,0 +1,19 @@
+class BenchALotOfChainedIterators{
+	static public main(method) : Void -> Void
+
+	 = function() = {
+		Lambda.array({
+			var itb;
+			{
+				var itr = new IRU(0,10);
+				itb = new IterDup(itr,2);
+			};
+			new IterLoop(itb,2);
+		});
+		for (x in {
+			var itr = new IRU(0,10);
+			new IterDup(itr,2);
+		}) haxe.Log.trace(x,{fileName : "BenchALotOfChainedIterators.hx",lineNumber : 16,className : "BenchALotOfChainedIterators",methodName : "main"});
+	}
+
+}

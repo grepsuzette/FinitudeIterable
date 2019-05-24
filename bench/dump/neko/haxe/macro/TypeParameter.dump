@@ -1,0 +1,1 @@
+type haxe.macro.TypeParameter = { t : haxe.macro.Type, name : String }

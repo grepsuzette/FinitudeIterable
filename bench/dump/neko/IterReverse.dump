@@ -1,0 +1,43 @@
+class IterReverse<T : IterReverse.T>{
+	public new(inline method) : b : Array<IterReverse.T> -> Void
+
+	 = function(b:Array<IterReverse.T>) = {
+		this.a = b;
+		this.i = b.length;
+	}
+
+	a(var) : Array<IterReverse.T>
+
+	i(var) : Int
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.i > 0;
+	}
+
+	public next(inline method) : Void -> IterReverse.T
+
+	 = function() = {
+		return this.a[-- this.i];
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IterReverse.T>
+
+	 = function() = {
+		return new IterReverse(this.a);
+	}
+
+	static public _iterReverse<T : _iterReverse.T>(inline method) : a : Iterable<_iterReverse.T> -> IterableIterator<_iterReverse.T>
+
+	 = function(a:Iterable<_iterReverse.T>) = {
+		return new IterReverse(if ((Std.is(a,Array)))cast a else IterReverse.arrayOrEmpty(a));
+	}
+
+	static public arrayOrEmpty<T : arrayOrEmpty.T>(method) : a : Iterable<arrayOrEmpty.T> -> Array<arrayOrEmpty.T>
+
+	 = function(a:Iterable<arrayOrEmpty.T>) = {
+		if ((Std.is(a,FinitudeIterable) && (cast (a,FinitudeIterable)).isInfiniteIter()))throw "Cannot IterReverse infinite iterables" else return Lambda.array(a);
+	}
+
+}

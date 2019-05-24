@@ -1,0 +1,36 @@
+private extern class _List.ListNode<T : _List.ListNode.T> extends neko.NativeArray<Dynamic>{
+	public item((get,set)) : _List.ListNode.T
+
+	public next((get,set)) : _List.ListNode<_List.ListNode.T>
+
+	get_item(inline method) : Void -> _List.ListNode.T
+
+	 = function() = {
+		return this[0];
+	}
+
+	set_item(inline method) : v : _List.ListNode.T -> _List.ListNode.T
+
+	 = function(v:_List.ListNode.T) = {
+		return this[0] = v;
+	}
+
+	get_next(inline method) : Void -> _List.ListNode<_List.ListNode.T>
+
+	 = function() = {
+		return this[1];
+	}
+
+	set_next(inline method) : v : _List.ListNode<_List.ListNode.T> -> _List.ListNode<_List.ListNode.T>
+
+	 = function(v:_List.ListNode<_List.ListNode.T>) = {
+		return this[1] = v;
+	}
+
+	static public create<T : create.T>(inline method) : item : create.T -> next : _List.ListNode<create.T> -> _List.ListNode<create.T>
+
+	 = function(item:create.T,next:_List.ListNode<create.T>) = {
+		return __dollar__array(item,next);
+	}
+
+}

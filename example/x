@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mkdir -p n
+execute() {
+    haxe -lib FinitudeIterables -main $1 -neko n/$1.n && neko n/$1
+}
+
+p="${1^?}"
+if [[ $p == "" ]]; then
+    echo "Bash script shortcut to test a file"
+    echo "Syntax: $0 [Demo]<name>"
+elif [[ -f "$p.hx" ]]; then execute "$p";
+elif [[ -f "Demo$p.hx" ]]; then execute "Demo$p";
+else echo "Couldn't find [Demo]$p.hx"
+fi

@@ -1,0 +1,37 @@
+class IRSU<T : IRSU.T>{
+	public new(inline method) : from : IRSU.T -> to : IRSU.T -> step : IRSU.T -> Void
+
+	 = function(from:IRSU.T,to:IRSU.T,step:IRSU.T) = {
+		this.d = step;
+		this.ab = from;
+		this.ad = to - this.d;
+		this.n = this.ab - this.d;
+	}
+
+	ab(var) : IRSU.T
+
+	ad(var) : IRSU.T
+
+	d(var) : IRSU.T
+
+	n(var) : IRSU.T
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.n < this.ad;
+	}
+
+	public next(inline method) : Void -> IRSU.T
+
+	 = function() = {
+		return this.n += this.d;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IRSU.T>
+
+	 = function() = {
+		return new IRSU(this.ab,this.ad + this.d,this.d);
+	}
+
+}

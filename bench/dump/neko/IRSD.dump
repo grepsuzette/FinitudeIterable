@@ -1,0 +1,37 @@
+class IRSD<T : IRSD.T>{
+	public new(inline method) : from : IRSD.T -> to : IRSD.T -> step : IRSD.T -> Void
+
+	 = function(from:IRSD.T,to:IRSD.T,step:IRSD.T) = {
+		this.d = step;
+		this.ab = from;
+		this.ad = to - this.d;
+		this.n = this.ab - this.d;
+	}
+
+	ab(var) : IRSD.T
+
+	ad(var) : IRSD.T
+
+	d(var) : IRSD.T
+
+	n(var) : IRSD.T
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.n > this.ad;
+	}
+
+	public next(inline method) : Void -> IRSD.T
+
+	 = function() = {
+		return this.n += this.d;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IRSD.T>
+
+	 = function() = {
+		return new IRSD(this.ab,this.ad + this.d,this.d);
+	}
+
+}

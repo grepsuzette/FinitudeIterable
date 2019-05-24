@@ -1,0 +1,1 @@
+type IterableIterator<T : IterableIterator.T> = { next : Void -> IterableIterator.T, iterator : Void -> Iterator<IterableIterator.T>, hasNext : Void -> Bool }

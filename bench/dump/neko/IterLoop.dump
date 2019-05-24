@@ -1,0 +1,115 @@
+class IterLoop<T : IterLoop.T> implements FinitudeIterable{
+	public new(method) : itb : Iterable<IterLoop.T> -> ?loops : Int -> Void
+
+	 = function(itb:Iterable<IterLoop.T>,loops:Int = 1073741824) = {
+		if ((loops < 0 && Std.is(this.a,FinitudeIterable) && (cast (this.a,FinitudeIterable)).isInfiniteIter()))throw "Cannot iterate backwards on infinite iter";
+		this.a = itb;
+		this.n = loops;
+		if ((this.n < 0)){
+			if ((this.n == 1073741824))this.m = 1073741824 else this.m = - this.n;
+		} else this.m = this.n;
+		this.it = cast if ((this.n < 0))new IterReverse(IterReverse.arrayOrEmpty(this.a)) else this.a.iterator();
+		this.d = 0;
+		this.ii = this.m == 1073741824 || Std.is(this.a,FinitudeIterable) && (cast (this.a,FinitudeIterable)).isInfiniteIter();
+		this.hn = this.__hasNext();
+	}
+
+	a(var) : Iterable<IterLoop.T>
+
+	n(var) : Int
+
+	m(var) : Int
+
+	d(var) : Int
+
+	it(var) : Iterator<IterLoop.T>
+
+	ii(var) : Bool
+
+	hn(var) : Bool
+
+	public hasNext(method) : Void -> Bool
+
+	 = function() = {
+		return this.hn;
+	}
+
+	public __hasNext(method) : Void -> Bool
+
+	 = function() = {
+		if ((this.n == 0))return false;
+		if ((! this.it.hasNext())){
+			if ((this.n != 1073741824 && ++ this.d >= this.m))return false;
+			if ((this.n < 0))this.it = new IterReverse(IterReverse.arrayOrEmpty(this.a)) else this.it = this.a.iterator();
+			return this.it.hasNext();
+		};
+		return true;
+	}
+
+	public next(inline method) : Void -> IterLoop.T
+
+	 = function() = {
+		var ret = this.it.next();
+		this.hn = this.__hasNext();
+		return ret;
+	}
+
+	public isInfiniteIter(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.ii;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IterLoop.T>
+
+	 = function() = {
+		return new IterLoop(this.a,this.n);
+	}
+
+	static public INFINITY((inline,never)) : Int
+
+	 = 1073741824
+
+	static public NINFINITY((inline,never)) : Int
+
+	 = -1073741824
+
+	static public iterLoop<T : iterLoop.T>(inline method) : itb : Iterable<iterLoop.T> -> ?loops : Int -> IterableIterator<iterLoop.T>
+
+	 = function(itb:Iterable<iterLoop.T>,loops:Int = 1073741824) = {
+		return new IterLoop(itb,loops);
+	}
+
+	static public loop<T : loop.T>(inline method) : itb : Iterable<loop.T> -> ?loops : Int -> IterableIterator<loop.T>
+
+	 = function(itb:Iterable<loop.T>,loops:Int = 1073741824) = {
+		return new IterLoop(itb,loops);
+	}
+
+	static public loopLastN<T : loopLastN.T>(inline method) : itr : Iterable<loopLastN.T> -> n : Int -> ?x : Int -> IterableIterator<loopLastN.T>
+
+	 = function(itr:Iterable<loopLastN.T>,n:Int,x:Int = 1073741824) = {
+		return new IterLoopLastN(itr,n,x);
+	}
+
+	static public iterPingPong<T : iterPingPong.T>(inline method) : a : Iterable<iterPingPong.T> -> ?n : Int -> IterableIterator<iterPingPong.T>
+
+	 = function(a:Iterable<iterPingPong.T>,n:Int = 1073741824) = {
+		{
+			var itb = new IterChain(if ((n >= 0))[a,new IterReverse(IterReverse.arrayOrEmpty(a))] else [new IterReverse(IterReverse.arrayOrEmpty(a)),a]);
+			var loops = cast Math.abs(n);
+			return new IterLoop(itb,loops);
+		};
+	}
+
+	static public pingpong<T : pingpong.T>(inline method) : a : Iterable<pingpong.T> -> ?n : Int -> IterableIterator<pingpong.T>
+
+	 = function(a:Iterable<pingpong.T>,n:Int = 1073741824) = {
+		return cast {
+			var itb = new IterChain(if ((n >= 0))[a,new IterReverse(IterReverse.arrayOrEmpty(a))] else [new IterReverse(IterReverse.arrayOrEmpty(a)),a]);
+			var loops = cast Math.abs(n);
+			new IterLoop(itb,loops);
+		};
+	}
+
+}

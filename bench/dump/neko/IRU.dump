@@ -1,0 +1,34 @@
+class IRU<T : IRU.T>{
+	public new(inline method) : from : IRU.T -> to : IRU.T -> Void
+
+	 = function(from:IRU.T,to:IRU.T) = {
+		this.ab = from;
+		this.ad = to;
+		this.n = this.ab;
+	}
+
+	ab(var) : IRU.T
+
+	ad(var) : IRU.T
+
+	n(var) : IRU.T
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.n < this.ad;
+	}
+
+	public next(inline method) : Void -> IRU.T
+
+	 = function() = {
+		return this.n ++;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IRU.T>
+
+	 = function() = {
+		return new IRU(this.ab,this.ad);
+	}
+
+}

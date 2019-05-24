@@ -1,0 +1,58 @@
+class Math{
+	static public PI((default,null)) : Float
+
+	static public NaN((default,null)) : Float
+
+	static public POSITIVE_INFINITY((default,null)) : Float
+
+	static public NEGATIVE_INFINITY((default,null)) : Float
+
+	static public abs(method) : v : Float -> Float
+
+	 = function(v:Float) = {
+		return 0.;
+	}
+
+	static __rnd(var) : Unknown<1>
+
+
+
+	__init__ = {
+		Math.__rnd = neko.Lib.load("std","random_new",0)();
+		Math.PI = neko.Lib.load("std","math_pi",0)();
+		Math.NaN = 0.0 / 0.0;
+		Math.POSITIVE_INFINITY = 1.0 / 0.0;
+		Math.NEGATIVE_INFINITY = - Math.POSITIVE_INFINITY;
+		var M = Math;
+		M.abs = neko.Lib.load("std","math_abs",1);
+		M.sin = neko.Lib.load("std","math_sin",1);
+		M.cos = neko.Lib.load("std","math_cos",1);
+		M.atan2 = neko.Lib.load("std","math_atan2",2);
+		M.tan = neko.Lib.load("std","math_tan",1);
+		M.exp = neko.Lib.load("std","math_exp",1);
+		M.log = neko.Lib.load("std","math_log",1);
+		M.sqrt = neko.Lib.load("std","math_sqrt",1);
+		M.round = neko.Lib.load("std","math_round",1);
+		M.floor = neko.Lib.load("std","math_floor",1);
+		M.ceil = neko.Lib.load("std","math_ceil",1);
+		M.atan = neko.Lib.load("std","math_atan",1);
+		M.asin = neko.Lib.load("std","math_asin",1);
+		M.acos = neko.Lib.load("std","math_acos",1);
+		M.pow = neko.Lib.load("std","math_pow",2);
+		try {
+			M.fceil = neko.Lib.load("std","math_fceil",1);
+		}catch( e : Dynamic ) {
+			M.fceil = M.ceil;
+		};
+		try {
+			M.ffloor = neko.Lib.load("std","math_ffloor",1);
+		}catch( e : Dynamic ) {
+			M.ffloor = M.floor;
+		};
+		try {
+			M.fround = neko.Lib.load("std","math_fround",1);
+		}catch( e : Dynamic ) {
+			M.fround = M.round;
+		};
+	}}
+}

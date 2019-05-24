@@ -1,0 +1,31 @@
+class Std{
+	static public is(method) : v : Dynamic -> t : Dynamic -> Bool
+
+	 = function(v:Dynamic,t:Dynamic) = {
+		return neko.Boot.__instanceof(v,t);
+	}
+
+	static public string(method) : s : Dynamic -> String
+
+	 = function(s:Dynamic) = {
+		return new String(__dollar__string(s));
+	}
+
+
+
+	__init__ = {
+		Int = {__name__ : ["Int"]};
+		Float = {__name__ : ["Float"]};
+		Bool = {__ename__ : ["Bool"]};
+		Dynamic = {__name__ : ["Dynamic"]};
+		Class = {__name__ : ["Class"]};
+		Enum = {};
+		var cl = neko.Boot.__classes;
+		cl.Int = Int;
+		cl.Float = Float;
+		cl.Bool = Bool;
+		cl.Dynamic = Dynamic;
+		cl.Class = Class;
+		cl.Enum = Enum;
+	}}
+}

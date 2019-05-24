@@ -1,0 +1,4 @@
+interface FinitudeIterable{
+	public isInfiniteIter(method) : Void -> Bool
+
+}

@@ -1,0 +1,71 @@
+class IterLoopLastN<T : IterLoopLastN.T> implements FinitudeIterable{
+	public new(method) : itr : Iterable<IterLoopLastN.T> -> n_ : Int -> ?xtratimes : Int -> Void
+
+	 = function(itr:Iterable<IterLoopLastN.T>,n_:Int,xtratimes:Int = 1073741824) = {
+		this.a = itr;
+		this.it = this.a.iterator();
+		this.x = xtratimes;
+		this.n = n_;
+		this.l = [];
+		this.ii = this.x == 1073741824 || this.x == -1073741824 || Std.is(this.a,FinitudeIterable) && (cast (this.a,FinitudeIterable)).isInfiniteIter();
+	}
+
+	a(var) : Iterable<IterLoopLastN.T>
+
+	it(var) : Iterator<IterLoopLastN.T>
+
+	l(var) : Array<IterLoopLastN.T>
+
+	it2(var) : Iterator<IterLoopLastN.T>
+
+	x(var) : Int
+
+	n(var) : Int
+
+	ii(var) : Bool
+
+	public isInfiniteIter(method) : Void -> Bool
+
+	 = function() = {
+		return this.ii;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IterLoopLastN.T>
+
+	 = function() = {
+		return new IterLoopLastN(this.a,this.n,this.x);
+	}
+
+	public hasNext(method) : Void -> Bool
+
+	 = function() = {
+		if ((! this.it.hasNext() && this.it2 == null))this.it2 = cast new IterLoop(this.l,this.x);
+		return this.x == 1073741824 || this.x == -1073741824 || this.it.hasNext() || this.it2.hasNext();
+	}
+
+	public next(method) : Void -> IterLoopLastN.T
+
+	 = function() = {
+		if ((this.it.hasNext())){
+			var v = this.it.next();
+			this.l.push(v);
+			if ((this.l.length > this.n))this.l.shift();
+			return v;
+		} else return this.it2.next();
+	}
+
+	static public INFINITY((inline,never)) : Int
+
+	 = 1073741824
+
+	static public NINFINITY((inline,never)) : Int
+
+	 = -1073741824
+
+	static public loopLastN<T : loopLastN.T>(inline method) : itr : Iterable<loopLastN.T> -> n : Int -> ?x : Int -> IterableIterator<loopLastN.T>
+
+	 = function(itr:Iterable<loopLastN.T>,n:Int,x:Int = 1073741824) = {
+		return new IterLoopLastN(itr,n,x);
+	}
+
+}

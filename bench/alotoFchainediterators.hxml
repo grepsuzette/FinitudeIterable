@@ -1,0 +1,8 @@
+-x BenchALotOfChainedIterators
+#-lib tink_core
+#-lib tink_lang
+#-lib tink_priority
+#-lib tink_macro
+#-lib tink_syntaxhub
+-lib FinitudeIterables
+-D dump=pretty

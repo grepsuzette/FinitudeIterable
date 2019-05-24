@@ -1,0 +1,70 @@
+class IterRange<T : IterRange.T>{
+	public new(method) : from : IterRange.T -> to : IterRange.T -> ?step : IterRange.T -> ?reverseRange : Bool -> Void
+
+	 = function(from:IterRange.T,to:IterRange.T,step:IterRange.T = 1.,reverseRange:Bool = false) = {
+		if ((! reverseRange))this.ab = from else this.ab = to - 1;
+		if ((! reverseRange))this.ad = to else this.ad = from - 1;
+		this.d = step;
+		if ((this.ab > this.ad && this.d > 0.))this.d = - this.d else if ((this.ab < this.ad && this.d < 0.))this.d = - this.d;
+		this.n = this.ab;
+	}
+
+	ab(var) : IterRange.T
+
+	ad(var) : IterRange.T
+
+	d(var) : IterRange.T
+
+	n(var) : IterRange.T
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		if ((this.ab <= this.ad))return this.n < this.ad else return this.n > this.ad;
+	}
+
+	public next(inline method) : Void -> IterRange.T
+
+	 = function() = {
+		var p = this.n;
+		this.n += this.d;
+		return p;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IterRange.T>
+
+	 = function() = {
+		return new IterRange(this.ab,this.ad,this.d,null);
+	}
+
+	static public range<T : range.T>(inline method) : a : range.T -> b : range.T -> IRU<range.T>
+
+	 = function(a:range.T,b:range.T) = {
+		return new IRU(a,b);
+	}
+
+	static public rangeDown<T : rangeDown.T>(inline method) : a : rangeDown.T -> b : rangeDown.T -> IRD<rangeDown.T>
+
+	 = function(a:rangeDown.T,b:rangeDown.T) = {
+		return new IRD(a,b);
+	}
+
+	static public rangeStep<T : rangeStep.T>(inline method) : a : rangeStep.T -> b : rangeStep.T -> s : rangeStep.T -> IRSU<rangeStep.T>
+
+	 = function(a:rangeStep.T,b:rangeStep.T,s:rangeStep.T) = {
+		return new IRSU(a,b,s);
+	}
+
+	static public rangeStepDown<T : rangeStepDown.T>(inline method) : a : rangeStepDown.T -> b : rangeStepDown.T -> s : rangeStepDown.T -> IRSD<rangeStepDown.T>
+
+	 = function(a:rangeStepDown.T,b:rangeStepDown.T,s:rangeStepDown.T) = {
+		return new IRSD(a,b,s);
+	}
+
+	static public rangeG<T : rangeG.T>(inline method) : a : rangeG.T -> b : rangeG.T -> ?s : rangeG.T -> ?reverseRange : Bool -> IterRange<rangeG.T>
+
+	 = function(a:rangeG.T,b:rangeG.T,s:rangeG.T = 1.,reverseRange:Bool = false) = {
+		return new IterRange(a,b,s,reverseRange);
+	}
+
+}

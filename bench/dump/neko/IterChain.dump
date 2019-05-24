@@ -1,0 +1,64 @@
+class IterChain<T : IterChain.T>{
+	public new(method) : a : Iterable<Iterable<IterChain.T>> -> Void
+
+	 = function(a:Iterable<Iterable<IterChain.T>>) = {
+		this.all = a;
+		this.master = this.all.iterator();
+		this.inner = this.getNextInnerHavingNext_orNull();
+		this.isInfinite = Lambda.exists(this.all,function(itb:Iterable<IterChain.T>) = {
+			return Std.is(itb,"FinitudeIterable") && itb.isInfiniteIter();
+		});
+	}
+
+	all(var) : Iterable<Iterable<IterChain.T>>
+
+	master(var) : Iterator<Iterable<IterChain.T>>
+
+	inner(var) : Iterator<IterChain.T>
+
+	isInfinite(var) : Bool
+
+	public isInfiniteIter(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.isInfinite;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IterChain.T>
+
+	 = function() = {
+		return new IterChain(this.all);
+	}
+
+	public next(inline method) : Void -> IterChain.T
+
+	 = function() = {
+		return this.inner.next();
+	}
+
+	public hasNext(method) : Void -> Bool
+
+	 = function() = {
+		return this.inner.hasNext() || (this.inner = this.getNextInnerHavingNext_orNull()) != null;
+	}
+
+	public getNextInnerHavingNext_orNull(method) : Void -> Iterator<IterChain.T>
+
+	 = function() = {
+		while ((this.inner == null || ! this.inner.hasNext())) if ((this.master.hasNext()))this.inner = this.master.next().iterator() else return null;
+		return this.inner;
+	}
+
+	static public andThenIter<T : andThenIter.T>(inline method) : a : Iterable<andThenIter.T> -> b : Iterable<andThenIter.T> -> IterChain<andThenIter.T>
+
+	 = function(a:Iterable<andThenIter.T>,b:Iterable<andThenIter.T>) = {
+		return new IterChain([a,b]);
+	}
+
+	static public iterChain<T : iterChain.T>(inline method) : a : Iterable<Iterable<iterChain.T>> -> IterChain<iterChain.T>
+
+	 = function(a:Iterable<Iterable<iterChain.T>>) = {
+		return new IterChain(a);
+	}
+
+}

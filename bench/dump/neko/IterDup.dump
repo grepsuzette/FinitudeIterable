@@ -1,0 +1,49 @@
+class IterDup<T : IterDup.T>{
+	public new(method) : itr : Iterable<IterDup.T> -> ?count : Int -> Void
+
+	 = function(itr:Iterable<IterDup.T>,count:Int = 2) = {
+		this.a = itr;
+		this.n = count;
+		if ((this.n < 0))throw "fkwr2 reserved";
+		this.c = 0;
+		this.it = this.a.iterator();
+		if ((this.it.hasNext()))this.t = this.it.next();
+	}
+
+	a(var) : Iterable<IterDup.T>
+
+	n(var) : Int
+
+	it(var) : Iterator<IterDup.T>
+
+	c(var) : Int
+
+	t(var) : IterDup.T
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.n > 0 && (this.c < this.n || this.it.hasNext());
+	}
+
+	public next(method) : Void -> IterDup.T
+
+	 = function() = {
+		if ((this.c ++ < this.n))return this.t;
+		this.c = 1;
+		return this.t = this.it.next();
+	}
+
+	public iterator(method) : Void -> IterableIterator<IterDup.T>
+
+	 = function() = {
+		return new IterDup(this.a,this.n);
+	}
+
+	static public dup<T : dup.T>(inline method) : itr : Iterable<dup.T> -> ?count : Int -> IterableIterator<dup.T>
+
+	 = function(itr:Iterable<dup.T>,count:Int = 2) = {
+		return new IterDup(itr,count);
+	}
+
+}

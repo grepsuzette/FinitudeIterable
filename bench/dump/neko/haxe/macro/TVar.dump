@@ -1,0 +1,1 @@
+type haxe.macro.TVar = { t : haxe.macro.Type, name : String, id : Int, extra : Null<{ params : Array<haxe.macro.TypeParameter>, expr : Null<haxe.macro.TypedExpr> }>, capture : Bool }

@@ -1,0 +1,34 @@
+class IRD<T : IRD.T>{
+	public new(inline method) : from : IRD.T -> to : IRD.T -> Void
+
+	 = function(from:IRD.T,to:IRD.T) = {
+		this.ab = from;
+		this.ad = to;
+		this.n = this.ab;
+	}
+
+	ab(var) : IRD.T
+
+	ad(var) : IRD.T
+
+	n(var) : IRD.T
+
+	public hasNext(inline method) : Void -> Bool
+
+	 = function() = {
+		return this.n > this.ad;
+	}
+
+	public next(inline method) : Void -> IRD.T
+
+	 = function() = {
+		return this.n --;
+	}
+
+	public iterator(inline method) : Void -> IterableIterator<IRD.T>
+
+	 = function() = {
+		return new IRD(this.ab,this.ad);
+	}
+
+}
